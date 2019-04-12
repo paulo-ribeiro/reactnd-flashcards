@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { white } from '../utils/colors';
+import { white, black, grey } from '../utils/colors';
 
 const Deck = ({ title, numOfCards }) => (
   <View style={styles.item}>
-    <Text>{title}</Text>
-    <Text>{numOfCards} cards</Text>
+    <Text style={styles.title}>{title}</Text>
+    <Text style={styles.cards}>{numOfCards} cards</Text>
   </View>
 );
 
@@ -27,6 +27,16 @@ const styles = StyleSheet.create({
       height: 3
     }
   },
+  title: {
+    fontSize: 20,
+    textAlign: "center",
+    color: black
+  },
+  cards: {
+    fontSize: 16,
+    textAlign: "center",
+    color: grey
+  }
 });
 
 const mapStateToProps = (state, { title }) => ({
