@@ -1,8 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import Deck from './Deck';
 
-export default Decks = () => (
+const Decks = ({ decks }) => (
   <View style={{ flex: 1 }}>
-    <Text>Decks view</Text>
+    {Object.keys(decks).map(key => <Deck key={key} title={key} />)}
   </View>
 );
+
+const mapStateToProps = (state) => ({
+  decks: state
+});
+
+export default connect(mapStateToProps)(Decks);
