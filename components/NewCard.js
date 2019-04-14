@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { black, white } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addCard } from '../actions'
+import { saveCard } from '../utils/api';
 import CustomInput from './CustomInput';
 import Button from './Button';
 import ErrMsg from './ErrorMsg';
@@ -23,10 +24,14 @@ class NewCard extends Component {
       return;
     }
 
-    dispatch(addCard(navigation.state.params.title, {
+    const card = {
       question,
       answer
-    }));
+    };
+
+    dispatch(addCard(navigation.state.params.title, card));
+
+    saveCard(navigation.state.params.title, card);
 
     navigation.goBack();
   };

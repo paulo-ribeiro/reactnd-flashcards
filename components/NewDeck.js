@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
 import { black, white } from '../utils/colors';
+import { saveDeck } from '../utils/api';
 import Button from './Button';
 import CustomInput from './CustomInput';
 
@@ -15,6 +16,7 @@ class NewDeck extends Component {
 
   onSubmit = () => {
     const { title } = this.state;
+    const { decks, dispatch } = this.props;
 
     if (title.trim() === "") {
       this.setState({
@@ -24,7 +26,7 @@ class NewDeck extends Component {
       return;
     }
 
-    if (this.props.decks[title]) {
+    if (decks[title]) {
       this.setState({
         error: true,
         msg: "A deck with this title already exists."
@@ -32,12 +34,16 @@ class NewDeck extends Component {
       return;
     }
 
-    this.props.dispatch(addDeck({
+    const deck = {
       title,
       questions: []
-    }));
+    };
+
+    dispatch(addDeck(deck));
 
     this.setState({ title: "", error: false, msg: "" });
+
+    saveDeck(deck);
   }
 
   render() {
