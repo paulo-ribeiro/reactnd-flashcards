@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
-import { black, white, red } from '../utils/colors';
+import { black, white } from '../utils/colors';
 import Button from './Button';
 import CustomInput from './CustomInput';
 
@@ -49,7 +49,7 @@ class NewDeck extends Component {
           onChange={(title) => this.setState({ title })}
           value={this.state.title} />
         {this.state.error
-          && <Text style={styles.errMsg}>{this.state.msg}</Text>}
+          && <ErrorMsg text={this.state.msg} />}
         <Button
           text={"Submit"}
           onPress={this.onSubmit}
@@ -69,11 +69,6 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 26,
     textAlign: "center"
-  },
-  errMsg: {
-    fontSize: 16,
-    color: red,
-    padding: 10
   }
 });
 
