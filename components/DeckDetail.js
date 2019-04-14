@@ -55,7 +55,6 @@ class DeckDetail extends Component {
             onPress={this.onStartQuiz}
             btnStyle={{ backgroundColor: black, marginTop: 20 }}
             txtStyle={{ color: white }} />
-          <Button />
           {this.state.error
             && <ErrorMsg text={"You dont have any cards \u{1F61E}"} txtStyle={{ textAlign: "center" }} />}
         </View>
