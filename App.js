@@ -11,6 +11,7 @@ import NewDeck from './components/NewDeck';
 import DeckDetail from './components/DeckDetail';
 import NewCard from './components/NewCard';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/api';
 
 const AppStatusBar = ({ backgroundColor, ...props }) => (
   <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -87,6 +88,10 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>

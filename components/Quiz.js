@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { green, red, white, black } from '../utils/colors';
 import Button from './Button';
+import { clearLocalNotification, setLocalNotification } from '../utils/api';
 
 class Quiz extends Component {
   state = {
@@ -11,8 +12,12 @@ class Quiz extends Component {
     position: 0
   };
 
-  nextQuestion = () =>
-    this.setState(prevState => ({ position: prevState.position + 1 }));
+  nextQuestion = () => {
+    this.setState(
+      prevState => ({ position: prevState.position + 1 }),
+      () => this.state.position === this.props.deck.questions.length 
+        && clearLocalNotification().then(setLocalNotification));
+  };
 
   onCorrect = () => {
     this.nextQuestion();
