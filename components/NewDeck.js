@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
 import { black, white } from '../utils/colors';
@@ -16,7 +16,7 @@ class NewDeck extends Component {
 
   onSubmit = () => {
     const { title } = this.state;
-    const { decks, dispatch } = this.props;
+    const { decks, dispatch, navigation } = this.props;
 
     if (title.trim() === "") {
       this.setState({
@@ -43,7 +43,11 @@ class NewDeck extends Component {
 
     this.setState({ title: "", error: false, msg: "" });
 
+    Keyboard.dismiss();
+
     saveDeck(deck);
+
+    navigation.navigate("DeckDetail", { title: title });
   }
 
   render() {
